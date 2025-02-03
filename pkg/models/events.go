@@ -2,16 +2,37 @@ package models
 
 import "time"
 
+type EventType string
+
 const (
-	EventTypePush        = "push"
-	EventTypePullRequest = "pull_request"
-	EventTypeIssue       = "issue"
-	EventTypeRelease     = "release"
+	EventTypePush        EventType = "push"
+	EventTypePullRequest EventType = "pull_request"
+	EventTypeIssue       EventType = "issue"
+	EventTypeRelease     EventType = "release"
 )
+
+func (e EventType) String() string {
+	return string(e)
+}
+
+func (e EventType) Color() string {
+	switch e {
+	case EventTypePush:
+		return "green"
+	case EventTypePullRequest:
+		return "blue"
+	case EventTypeIssue:
+		return "red"
+	case EventTypeRelease:
+		return "purple"
+	default:
+		return "#f0f0f0"
+	}
+}
 
 type Event struct {
 	ID          string     `json:"id"`
-	Type        string     `json:"type"`
+	Type        EventType  `json:"type"`
 	Name        string     `json:"name"`
 	Description string     `json:"description"`
 	Actor       EventActor `json:"actor"`

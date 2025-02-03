@@ -29,9 +29,9 @@ var journeOpts = struct {
 	filter: scmscanner.Filter{
 		Since: 7 * 24 * time.Hour,
 		Events: []string{
-			models.EventTypePush,
-			models.EventTypePullRequest,
-			models.EventTypeRelease,
+			models.EventTypePush.String(),
+			models.EventTypePullRequest.String(),
+			models.EventTypeRelease.String(),
 		},
 		Repos: []string{},
 	},

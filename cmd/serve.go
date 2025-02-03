@@ -32,13 +32,13 @@ var serveCmd = &cobra.Command{
 	Use:   "serve",
 	Short: "Start webserver that can serve ics files",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		serveMux := http.NewServeMux()
 		randomKeyKeeper, err := secrets.OpenKeeper(cmd.Context(), fmt.Sprintf("base64key://%s", serverOpts.secretKey))
 		if err != nil {
 			return fmt.Errorf("failed to open keeper: %w", err)
 		}
 		defer randomKeyKeeper.Close()
 
+		serveMux := http.NewServeMux()
 		router := server.NewRouter(randomKeyKeeper)
 		serveMux.Handle("GET /generate_link", http.HandlerFunc(router.GenerateLinkPage))
 		serveMux.Handle("POST /generate_link", http.HandlerFunc(router.GenerateLink))

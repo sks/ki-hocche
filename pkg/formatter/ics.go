@@ -35,6 +35,7 @@ func (ICSFormatter) toICalEvent(event models.Event) *ical.VEvent {
 	vEvent.SetDescription(event.Description)
 	vEvent.SetOrganizer(event.Actor.Email, ical.WithCN(event.Actor.Name))
 	vEvent.SetURL(event.Link)
+	vEvent.SetColor(event.Type.Color())
 	vEvent.SetLocation(event.Link)
 	return vEvent
 }

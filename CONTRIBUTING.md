@@ -9,7 +9,7 @@ This project and everyone participating in it is governed by the [Ki-Hocche Code
 
 ### Prerequisites
 
-- [Go](https://go.dev/doc/install) 1.21 or later
+- [Go](https://go.dev/doc/install)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [GitHub account](https://github.com)
 - [golangci-lint](https://golangci-lint.run/usage/install/) for linting

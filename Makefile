@@ -31,6 +31,9 @@ docker/build:
 release:
 	goreleaser release --rm-dist
 
+test:
+	go test ./...
+
 docker/tag/%: docker/build
 	docker tag ${IMAGE_REGISTRY}:${GIT_VERSION} ${IMAGE_REGISTRY}:$*
 

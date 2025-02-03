@@ -1,11 +1,15 @@
 # Ki-Hocche
 
+[![Build](https://github.com/sks/ki-hocche/actions/workflows/container.yml/badge.svg)](https://github.com/sks/ki-hocche/actions/workflows/container.yml)
+
+`ki hocche` is a Bengali word that means "what is happening".
+
 Ki-Hocche is a utility to help you find out what is happening in your SCM repositories. It creates a icalendar file from your SCM repositories. It is a simple tool that can be used to keep track of what is happening in your repositories.
 
 ## Installation
 
 ```bash
-go install github.com/ki-hocche/ki-hocche@latest
+go install github.com/sks/ki-hocche@latest
 ```
 
 ## Usage
@@ -17,21 +21,21 @@ ki-hocche [flags]
 ## Flags
 
 ```sh
-./ki-hocche --help
+ki-hocche --help
 ```
 
 ### Export to icalendar file
 
 ```bash
 export GITHUB_TOKEN=<your_github_token>
-./ki-hocche journey --repos=repo_1 --repos=repo_2 -t ics -o /tmp/mycal.ics;
+ki-hocche journey --repos=repo_1 --repos=repo_2 -t ics -o /tmp/mycal.ics;
 ```
 
 ### Export to JSON
 
 ```bash
 export GITHUB_TOKEN=<your_github_token>
-./ki-hocche journey --repos=repo_1 --repos=repo_2 -t json -o /tmp/events.json;
+ki-hocche journey --repos=repo_1 --repos=repo_2 -t json -o /tmp/events.json;
 ```
 
 ## Supported SCMs
