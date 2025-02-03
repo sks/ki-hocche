@@ -2,3 +2,4 @@ vendor
 bin
 ca0b9550-d787-463c-a573-8294a6f38608.zip
 iac
+secrets/*.yaml

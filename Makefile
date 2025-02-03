@@ -31,8 +31,9 @@ docker/build:
 helm: helm/download helm/upgrade
 
 helm/upgrade:
-	helm upgrade --install --debug --wait  \
+	helm upgrade --install --debug --wait \
 		--namespace sks \
+		--values ./secrets/values.yaml \
 		kihocche ./iac/helm/kihocche
 
 helm/download:
