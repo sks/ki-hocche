@@ -20,10 +20,10 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	golang.org/x/crypto v0.26.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
-	golang.org/x/sys v0.24.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240716161551-93cc26a95ae9 // indirect
 	google.golang.org/api v0.191.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240812133136-8ffd90a71988 // indirect
@@ -31,4 +31,8 @@ require (
 	google.golang.org/protobuf v1.34.2 // indirect
 )
 
-replace github.com/drone/go-scm => github.com/appcd-dev/go-scm v0.0.0-20241009172542-a16030046ecd
+replace (
+	github.com/drone/go-scm => github.com/appcd-dev/go-scm v0.0.0-20241009172542-a16030046ecd
+	golang.org/x/crypto => golang.org/x/crypto v0.32.0
+	golang.org/x/net => golang.org/x/net v0.34.0
+)
