@@ -30,10 +30,11 @@ func (ICSFormatter) toICalEvent(event models.Event) *ical.VEvent {
 	vEvent.SetStartAt(event.CreatedOn)
 	vEvent.SetEndAt(event.CreatedOn.Add(time.Second))
 
-	vEvent.SetSummary(fmt.Sprintf("[%s] %s", event.Repo.Name, event.Name))
+	vEvent.SetSummary(fmt.Sprintf("[%s][%s] %s", event.Type, event.Repo.Name, event.Name))
 
 	vEvent.SetDescription(event.Description)
 	vEvent.SetOrganizer(event.Actor.Email, ical.WithCN(event.Actor.Name))
 	vEvent.SetURL(event.Link)
+	vEvent.SetLocation(event.Link)
 	return vEvent
 }

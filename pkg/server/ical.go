@@ -42,7 +42,6 @@ func (router *Router) ServeICal(w http.ResponseWriter, r *http.Request) {
 		trouble.WriteError(w, r, err)
 		return
 	}
-	logger.Debug("filtering", "request", string(webRequest.byte()))
 	scanners, err := webRequest.Configs.Scanners()
 	if err != nil {
 		trouble.WriteError(w, r, err)
