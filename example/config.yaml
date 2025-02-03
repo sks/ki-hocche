@@ -1,0 +1,15 @@
+connectors:
+  - name: github
+    type: github
+    config:
+      token: "your-github-token"
+      api: "https://api.github.com"
+    filters:
+      repos:
+        - "repo1"
+        - "repo2"
+      events:
+        - "push"
+        - "pull_request"
+        - "releases"
+        - "issues"

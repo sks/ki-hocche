@@ -1,0 +1,67 @@
+version: 2
+
+release:
+  prerelease: auto
+  draft: false
+
+env:
+  - CGO_ENABLED=0
+
+builds:
+  - id: linux-build
+    binary: kihocche
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+      - ppc64le
+      - s390x
+    mod_timestamp: &build-timestamp '{{.CommitTimestamp}}'
+    ldflags: &build-ldflags |
+      -w
+      -s
+      -extldflags '-static'
+      -X github.com/sks/kihocche/pkg/constants.Version={{.Version}}
+      -X github.com/sks/kihocche/pkg/constants.BuildDate={{.Date}}
+  - id: darwin-build
+    binary: kihocche
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    mod_timestamp: *build-timestamp
+    ldflags: *build-ldflags
+  - id: windows-build
+    binary: kihocche
+    goos:
+      - windows
+    goarch:
+      - amd64
+    mod_timestamp: *build-timestamp
+    ldflags: *build-ldflags
+
+archives:
+  - id: linux-archives
+    builds:
+      - linux-build
+
+  # note: the signing process is depending on tar.gz archives. If this format changes then .github/scripts/apple-signing/*.sh will need to be adjusted
+  - id: darwin-archives
+    builds:
+      - darwin-build
+
+  - id: windows-archives
+    format: zip
+    builds:
+      - windows-build
+
+nfpms:
+  - license: "Apache 2.0"
+    maintainer: "kihocche, Inc"
+    homepage: &website "https://github.com/sks/kihocche.git"
+    description: &description "Turn your github events into calendar events"
+    formats:
+      - rpm
+      - deb
