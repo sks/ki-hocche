@@ -27,7 +27,7 @@ var journeOpts = struct {
 		},
 	},
 	filter: scmscanner.Filter{
-		Since: 7 * -24 * time.Hour,
+		Since: 7 * 24 * time.Hour,
 		Events: []string{
 			models.EventTypePush,
 			models.EventTypePullRequest,
@@ -68,6 +68,7 @@ func init() {
 	journeyCmd.Flags().StringVar(&journeOpts.config.Config.Token, "token", os.Getenv("GH_TOKEN"), "token to use")
 	journeyCmd.Flags().StringVar(&journeOpts.config.Config.Api, "api", journeOpts.config.Config.Api, "api to use")
 	journeyCmd.Flags().StringSliceVar(&journeOpts.filter.Repos, "repos", journeOpts.filter.Repos, "repos to filter")
+	journeyCmd.Flags().StringSliceVar(&journeOpts.filter.Namespace, "namespace", journeOpts.filter.Namespace, "namespace to filter")
 	journeyCmd.Flags().StringVarP(&journeOpts.output.Type, "type", "t", journeOpts.output.Type, "output type")
 	journeyCmd.Flags().StringVarP(&journeOpts.output.Output, "output", "o", journeOpts.output.Output, "output file")
 }

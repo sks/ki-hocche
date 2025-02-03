@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"net/http"
+	"slices"
 	"strings"
 	"time"
 
@@ -32,7 +33,7 @@ func newWebReq(data []byte) webRequest {
 
 func (router *Router) ServeICal(w http.ResponseWriter, r *http.Request) {
 	logger := logger.GetLogger(r.Context()).With("handler", "ical")
-	logger.Info("serving ical")
+	logger.Info("serving ical", "header", r.Header)
 	defer func(start time.Time) {
 		logger.Info("request served", "duration", time.Since(start).String())
 	}(time.Now())
@@ -91,6 +92,13 @@ func (router *Router) parseForm(r *http.Request) webRequest {
 		Repos:  strings.Split(r.Form.Get("repos"), ","),
 		Events: strings.Split(r.Form.Get("events"), ","),
 	}
+	// remove any empty strings from repos and events
+	filter.Events = slices.DeleteFunc(filter.Events, func(s string) bool {
+		return s == ""
+	})
+	filter.Repos = slices.DeleteFunc(filter.Repos, func(s string) bool {
+		return s == ""
+	})
 	return webRequest{
 		Configs: scmscanner.Configs{scmConfig},
 		Filter:  filter,

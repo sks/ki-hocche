@@ -27,3 +27,24 @@ docker/build:
 		--build-arg GIT_TAG=${GIT_VERSION} \
 		-t ${IMAGE_REGISTRY}:${GIT_VERSION} \
 		-f Dockerfile .
+
+release:
+	goreleaser release --rm-dist
+
+docker/tag/%: docker/build
+	docker tag ${IMAGE_REGISTRY}:${GIT_VERSION} ${IMAGE_REGISTRY}:$*
+
+helm: helm/download helm/upgrade
+
+helm/upgrade:
+	helm upgrade --install --debug --wait \
+		--namespace sks \
+		--values ./secrets/values.yaml \
+		kihocche ./iac/helm/kihocche
+
+helm/download:
+	rm -rf ./iac
+	stackgen appstack download-iac \
+		--uuid ca0b9550-d787-463c-a573-8294a6f38608
+	unzip -d ./iac ca0b9550-d787-463c-a573-8294a6f38608.zip
+	rm -rf ca0b9550-d787-463c-a573-8294a6f38608.zip
