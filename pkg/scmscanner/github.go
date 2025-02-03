@@ -39,12 +39,11 @@ func newGithubScanner(config SCMConfig) (Scanner, error) {
 	}, nil
 }
 
-func (s githubScanner) Get(ctx context.Context, filter Filter) (models.Events, error) {
+func (s githubScanner) Get(ctx context.Context, filter Filter) (events models.Events, err error) {
 	errGroup, ctx := errgroup.WithContext(ctx)
-	events := make(models.Events, 0)
 	logger := logger.GetLogger(ctx).With("provider", "github")
 	defer func(startTime time.Time) {
-		logger.DebugContext(ctx, "scan completed", "duration", time.Since(startTime).String())
+		logger.DebugContext(ctx, "scan completed", "events", len(events), "duration", time.Since(startTime).String())
 	}(time.Now())
 	repos, err := traverse.ReposV2(ctx, s.client, scm.ListOptions{
 		Page:    1,
@@ -78,12 +77,13 @@ func (s githubScanner) Get(ctx context.Context, filter Filter) (models.Events, e
 }
 
 func (s githubScanner) getRepoEvents(ctx context.Context, repo *scm.Repository, filter Filter) (models.Events, error) {
-	logger := logger.GetLogger(ctx).With("repo", repo.Name)
+	logger := logger.GetLogger(ctx).With("repo", repo.Name, "namespace", repo.Namespace)
 	if !filter.isInterestedIn(repo) {
 		logger.Debug("skipping repo")
 		return nil, nil
 	}
 	events := make(models.Events, 0)
+	logger.Debug("getting repo events", "events", filter.Events, "count", len(events))
 	for _, event := range filter.Events {
 		switch strings.ToLower(event) {
 		case string(models.EventTypePush):

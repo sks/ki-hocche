@@ -11,6 +11,7 @@ import (
 	"gocloud.dev/secrets"
 	_ "gocloud.dev/secrets/localsecrets"
 
+	"github.com/sks/kihocche/pkg/osutils"
 	"github.com/sks/kihocche/pkg/server"
 	"github.com/spf13/cobra"
 )
@@ -23,7 +24,7 @@ var serverOpts = struct {
 		Port:                    "8080",
 		ShutdownTimeoutDuration: 5 * time.Second,
 	},
-	secretKey: "smGbjm71Nxd1Ig5FS0wj9SlbzAIrnolCz9bQQ6uAhl4=",
+	secretKey: osutils.Getenv("ENCRYPTION_KEY", "smGbjm71Nxd1Ig5FS0wj9SlbzAIrnolCz9bQQ6uAhl4="),
 }
 
 // serverCmd represents the server command

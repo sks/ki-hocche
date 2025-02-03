@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"net/http"
+	"text/template"
 
 	"github.com/sks/kihocche/pkg/logger"
 	"github.com/sks/kihocche/pkg/trouble"
@@ -26,14 +27,19 @@ func (Router) GenerateLinkPage(w http.ResponseWriter, r *http.Request) {
 	// html template with a form that asks for the scm type, scm url, and the filter
 	// the form should have a submit button
 	// the form should be submitted to /generate_link
-	template := `
+	subpath := ""
+	if val := r.Header.Get("X-Subpath"); val != "" {
+		subpath = val
+	}
+	htmlTemplate := template.New("")
+	template, _ := htmlTemplate.Parse(`
 	<!DOCTYPE html>
 	<html>
 		<head>
 			<title>Generate Link</title>
 		</head>
 		<body>
-			<form action="/generate_link" method="POST">
+			<form action="{{.subpath}}/generate_link" method="POST">
 				<h1>Generate Link</h1>
 				<div>
 					<label for="type">SCM Type</label>
@@ -64,9 +70,11 @@ func (Router) GenerateLinkPage(w http.ResponseWriter, r *http.Request) {
 				<input type="submit" value="Generate Link">
 			</form>
 		</body>
-	</html>`
+	</html>`)
 	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write([]byte(template))
+	_ = template.Execute(w, map[string]string{
+		"subpath": subpath,
+	})
 }
 
 func (router Router) GenerateLink(w http.ResponseWriter, r *http.Request) {
@@ -84,8 +92,18 @@ func (router Router) GenerateLink(w http.ResponseWriter, r *http.Request) {
 	}
 	// write the key
 	// this URL Should be /generate_link, make it /subscribe.ics?key=<key> and show it in the response
+	subpath := ""
+	if val := r.Header.Get("X-Subpath"); val != "" {
+		subpath = val
+	}
+
+	link := fmt.Sprintf("%s/subscribe.ics?key=%s", subpath, key)
+
 	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write([]byte(fmt.Sprintf("Your link is: /subscribe.ics?key=%s", key)))
+	htmlTemplate, _ := template.New("").Parse(`<html><body>Your link is: <a href="{{.link}}">subscribe</a></body></html>`)
+	_ = htmlTemplate.Execute(w, map[string]string{
+		"link": link,
+	})
 }
 
 func (r Router) encrypt(ctx context.Context, request webRequest) (string, error) {

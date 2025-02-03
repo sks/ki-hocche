@@ -28,17 +28,22 @@ func (f Filter) isInterestedIn(repo *scm.Repository) bool {
 	if len(f.Repos) == 0 && len(f.Namespace) == 0 {
 		return true
 	}
+	// check if the repo is in the list of repos
+	isInNamespace := false
 	if len(f.Namespace) > 0 {
 		namespaceMatches := true
 		for _, namespace := range f.Namespace {
 			if namespace == repo.Namespace {
-				namespaceMatches = true // Namespace matches.
+				isInNamespace = true
 				break
 			}
 		}
 		if !namespaceMatches {
 			return false // Namespace doesn't match.
 		}
+	}
+	if isInNamespace && len(f.Repos) == 0 {
+		return true // Repository is in the namespace and no specific repos are provided.
 	}
 	for _, repoName := range f.Repos {
 		if repoName == repo.Name {

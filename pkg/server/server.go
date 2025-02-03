@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/sks/kihocche/pkg/constants"
 	"github.com/sks/kihocche/pkg/logger"
 	"golang.org/x/sync/errgroup"
 )
@@ -27,7 +28,7 @@ func (c Config) Start(ctx context.Context, handler http.Handler) error {
 		WriteTimeout: 10 * time.Second,
 	}
 	errGroup.Go(func() error {
-		logger.GetLogger(ctx).Info("server started", "port", c.Port)
+		logger.GetLogger(ctx).Info("server started", "version", constants.Version, "port", c.Port)
 		return server.ListenAndServe()
 	})
 	errGroup.Go(func() error {
