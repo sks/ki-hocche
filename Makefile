@@ -51,3 +51,6 @@ helm/download:
 		--uuid ca0b9550-d787-463c-a573-8294a6f38608
 	unzip -d ./iac ca0b9550-d787-463c-a573-8294a6f38608.zip
 	rm -rf ca0b9550-d787-463c-a573-8294a6f38608.zip
+
+gh/secret:
+	gh secret set VALUES_YAML < ./secrets/values.yaml

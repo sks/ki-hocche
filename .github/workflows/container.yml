@@ -14,8 +14,16 @@ env:
 
 jobs:
   docker:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-latest
+          - platform: linux/arm64
+            runner: ubuntu-22.04-arm
     name: Docker build
-    runs-on: ubuntu-22.04
+    runs-on: ${{ matrix.runner }}
     outputs:
       image_tag: ${{ steps.meta.outputs.tags }}
     permissions:
@@ -27,6 +35,10 @@ jobs:
           fetch-depth: 1
       - name: Setup Repo
         uses: ./.github/actions/setup
+      - name: Prepare
+        run: |
+          platform=${{ matrix.platform }}
+          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -46,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          platforms: 'linux/amd64,linux/arm64/v8'
+          platforms: ${{ matrix.platform }}
           tags: ${{ steps.meta.outputs.tags }}
           push: true
           provenance: false
