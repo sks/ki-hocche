@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/sks/ki-hocche/actions/workflows/container.yml/badge.svg)](https://github.com/sks/ki-hocche/actions/workflows/container.yml)
 
-`ki hocche` is a Bengali word that means "what is happening".
+`ki hocche` is a Bangla word that means "what is happening".
 
 Ki-Hocche is a utility to help you find out what is happening in your SCM repositories. It creates a icalendar file from your SCM repositories. It is a simple tool that can be used to keep track of what is happening in your repositories.
 
