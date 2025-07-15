@@ -1,6 +1,7 @@
 module github.com/sks/kihocche
 
-go 1.23.5
+go 1.24
+
 require (
 	github.com/arran4/golang-ical v0.3.2
 	github.com/drone/go-scm v1.39.1
@@ -8,7 +9,7 @@ require (
 	github.com/hashicorp/go-retryablehttp v0.7.7
 	github.com/spf13/cobra v1.9.1
 	gocloud.dev v0.41.0
-	golang.org/x/sync v0.12.0
+	golang.org/x/sync v0.16.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
