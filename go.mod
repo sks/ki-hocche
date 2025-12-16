@@ -7,7 +7,7 @@ require (
 	github.com/drone/go-scm v1.39.1
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	gocloud.dev v0.40.0
 	golang.org/x/sync v0.19.0
 	gopkg.in/yaml.v3 v3.0.1
