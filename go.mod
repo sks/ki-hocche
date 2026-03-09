@@ -3,7 +3,7 @@ module github.com/sks/kihocche
 go 1.24.0
 
 require (
-	github.com/arran4/golang-ical v0.3.2
+	github.com/arran4/golang-ical v0.3.4
 	github.com/drone/go-scm v1.39.1
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8

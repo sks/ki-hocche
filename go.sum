@@ -14,8 +14,8 @@ cloud.google.com/go/longrunning v0.6.7 h1:IGtfDWHhQCgCjwQjV9iiLnUta9LBCo8R9QmAFs
 cloud.google.com/go/longrunning v0.6.7/go.mod h1:EAFV3IZAKmM56TyiE6VAP3VoTzhZzySwI/YI1s/nRsY=
 github.com/appcd-dev/go-scm v0.0.0-20241009172542-a16030046ecd h1:KjD+H0xXT8NWm/OJCV1qvzWwoPzeDBmCgTx3KXKqO8s=
 github.com/appcd-dev/go-scm v0.0.0-20241009172542-a16030046ecd/go.mod h1:raVMHuVSvcF2uY1MOxHqXfh6V8TP6g+qGPdnx85pvvg=
-github.com/arran4/golang-ical v0.3.2 h1:MGNjcXJFSuCXmYX/RpZhR2HDCYoFuK8vTPFLEdFC3JY=
-github.com/arran4/golang-ical v0.3.2/go.mod h1:xblDGxxIUMWwFZk9dlECUlc1iXNV65LJZOTHLVwu8bo=
+github.com/arran4/golang-ical v0.3.4 h1:Rthe8/0AD6QzF+kx6XFS0g4FZNE7UiSfsOyrJzLotBA=
+github.com/arran4/golang-ical v0.3.4/go.mod h1:OnguFgjN0Hmx8jzpmWcC+AkHio94ujmLHKoaef7xQh8=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
